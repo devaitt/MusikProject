@@ -1,0 +1,26 @@
+.header__title {
+  text-align: center;
+}
+
+.header {
+  border-bottom: 2px solid #000;
+  position: relative;
+}
+
+.header__title {
+  font-size: 50px;
+  text-transform: lowercase;
+  font-weight: 700;
+}
+
+.header__container {
+  padding: 5px 0;
+}
+
+.header__earpods {
+  position: absolute;
+  top: -20px;
+  right: 50px;
+  width: 250px;
+  pointer-events: none;
+}
