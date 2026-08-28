@@ -26,6 +26,8 @@ const AddAlbumModal = ({ modalClose, addAlbum }: Props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [error, setError] = useState<string | null>(null);
+
   async function handleSearch() {
     const albumTitle = formData.album;
 
@@ -35,11 +37,13 @@ const AddAlbumModal = ({ modalClose, addAlbum }: Props) => {
 
     try {
       setIsLoading(true);
+      setError(null);
 
       const result = await searchAlbum(albumTitle);
       setSearchResults(result);
     } catch (error) {
       setSearchResults([]);
+      setError("Failed to load albums");
     } finally {
       setIsLoading(false);
     }
@@ -128,6 +132,12 @@ const AddAlbumModal = ({ modalClose, addAlbum }: Props) => {
                 <p> Searching...</p>
               </div>
             )} */}
+
+            {error && (
+              <div className="error-msg">
+                <p className="error-text">{error}</p>
+              </div>
+            )}
 
             {searchResults.length > 0 && (
               <ul className="search-result">
