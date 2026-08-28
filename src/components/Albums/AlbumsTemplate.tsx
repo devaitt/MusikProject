@@ -14,7 +14,7 @@ interface Props {
   toggleAlbumFavorite: (albumId: string) => void;
 }
 
-type SortOrder = "" | "asc" | "desc";
+type SortOrder = "" | "asc" | "desc" | "newest" | "oldest";
 
 type FilterType = "all" | "favorites";
 
@@ -34,6 +34,8 @@ export default function AlbumsTemplate({
     { value: "", label: "None" },
     { value: "asc", label: "A → Z" },
     { value: "desc", label: "Z → A" },
+    { value: "newest", label: "newest" },
+    { value: "oldest", label: "oldest" },
   ];
 
   const filterOption: Option<FilterType>[] = [
@@ -61,6 +63,14 @@ export default function AlbumsTemplate({
 
           if (sortOrder === "desc") {
             return b.album.localeCompare(a.album);
+          }
+
+          if (sortOrder === "newest") {
+            return b.year - a.year;
+          }
+
+          if (sortOrder === "oldest") {
+            return a.year - b.year;
           }
 
           return 0;
