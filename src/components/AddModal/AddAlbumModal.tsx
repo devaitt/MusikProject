@@ -10,9 +10,10 @@ import { type SearchResult } from "../../API/lastFmAPI";
 interface Props {
   modalClose: () => void;
   addAlbum: (newAlbum: Album) => void;
+  existingAlbums: Album[];
 }
 
-const AddAlbumModal = ({ modalClose, addAlbum }: Props) => {
+const AddAlbumModal = ({ modalClose, addAlbum, existingAlbums }: Props) => {
   const [formData, setFormData] = useState<AlbumForm>({
     album: "",
     artist: "",
@@ -72,6 +73,17 @@ const AddAlbumModal = ({ modalClose, addAlbum }: Props) => {
 
   function handleAddAlbum(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
+    const albumExists = existingAlbums.some(
+      (album) =>
+        album.album.toLowerCase() === formData.album.toLowerCase() &&
+        album.artist.toLowerCase() === formData.artist.toLowerCase()
+    );
+
+    if (albumExists) {
+      setError("The album has already been added");
+      return;
+    }
+
     addAlbum({
       ...formData,
       year: Number(formData.year),

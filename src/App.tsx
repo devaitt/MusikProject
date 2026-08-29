@@ -164,7 +164,11 @@ function App() {
         </Routes>
 
         {isModalOpen && (
-          <AddAlbumModal modalClose={modalClose} addAlbum={addAlbum} />
+          <AddAlbumModal
+            modalClose={modalClose}
+            addAlbum={addAlbum}
+            existingAlbums={albums}
+          />
         )}
       </main>
     </>
