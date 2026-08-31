@@ -9,11 +9,13 @@ import { Route, Routes } from "react-router-dom";
 import { searchAlbum, getAlbumInfo } from "./API/lastFmAPI";
 import StaticsticsSection from "./components/Statistics/StatisticsSection";
 import FavoriteAlbumsPage from "./pages/FavoriteAlbumsPage";
+import DeleteToast from "./components/DeleteToast/DeleteToast";
 import React from "react";
 import { type Album } from "./types";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deletedAlbum, setDeletedAlbum] = useState<Album | null>(null);
   const [albums, setAlbums] = useState<Album[]>(() => {
     const savedAlbums = localStorage.getItem("albums");
 
@@ -55,6 +57,17 @@ function App() {
     testSearch();
   }, []);
 
+  useEffect(() => {
+    if (deletedAlbum) {
+      const timer = setTimeout(() => {
+        setDeletedAlbum(null);
+      }, 5000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [deletedAlbum]);
   function openModal() {
     setIsModalOpen(true);
   }
@@ -73,9 +86,20 @@ function App() {
   }
 
   function deleteAlbum(id: string) {
+    const albumToDelete = albums.find((album) => album.id === id);
+    if (albumToDelete) {
+      setDeletedAlbum(albumToDelete);
+    }
     setAlbums((prev) => {
-      return prev.filter((albumToDelete) => albumToDelete.id !== id);
+      return prev.filter((album) => album.id !== id);
     });
+  }
+
+  function undoDelete() {
+    if (deletedAlbum) {
+      setAlbums((prev) => [...prev, deletedAlbum]);
+    }
+    setDeletedAlbum(null);
   }
 
   function resetAlbums() {
@@ -169,6 +193,10 @@ function App() {
             addAlbum={addAlbum}
             existingAlbums={albums}
           />
+        )}
+
+        {deletedAlbum !== null && (
+          <DeleteToast album={deletedAlbum} onUndo={undoDelete} />
         )}
       </main>
     </>
