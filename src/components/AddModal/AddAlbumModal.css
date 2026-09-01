@@ -1,3 +1,5 @@
+/* ================= OVERLAY ================= */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -68,16 +70,86 @@
 .search-bar {
   display: flex;
   gap: 12px;
+  position: relative;
 }
 
 .search-bar input {
   padding: 15px 15px;
   border-radius: 20px;
   flex: 1;
+  border: 2px solid #ddd;
+  transition: border-color 0.2s, background-color 0.2s;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-bar input:focus {
+  border-color: #000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ✅ Стили для инпута с ошибкой */
+.search-bar input.error {
+  border-color: #e74c3c;
+  background-color: #fff5f5;
+}
+
+.search-bar input.error:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
 }
 
 .search-btn {
   width: 140px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.search-btn:hover:not(:disabled) {
+  background-color: #333;
+}
+
+.search-btn:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+/* ✅ Сообщение об ошибке ПОД инпутом */
+.empty-album-input {
+  margin-top: -10px;
+  animation: slideDown 0.25s ease-out;
+}
+
+.empty-album-input p {
+  margin: 0;
+  padding: 8px 14px;
+  font-size: 14px;
+  color: #e74c3c;
+  background-color: #fff5f5;
+  border-radius: 10px;
+  border-left: 4px solid #e74c3c;
+  font-weight: 500;
+}
+
+/* Анимация появления ошибки */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 50px;
+  }
 }
 
 /* ================= INPUTS ================= */
@@ -215,4 +287,35 @@
   gap: 15px;
 
   padding-top: 25px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .modal {
+    width: 95%;
+    height: 90vh;
+    padding: 20px;
+  }
+
+  .modal__header h2 {
+    font-size: 32px;
+  }
+
+  .search-bar {
+    flex-direction: column;
+  }
+
+  .search-btn {
+    width: 100%;
+  }
+
+  .search-item__info {
+    gap: 10px;
+  }
+
+  .search-item__cover {
+    width: 50px;
+    height: 50px;
+  }
 }

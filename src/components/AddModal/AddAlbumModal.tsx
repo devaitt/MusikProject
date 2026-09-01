@@ -29,6 +29,8 @@ const AddAlbumModal = ({ modalClose, addAlbum, existingAlbums }: Props) => {
 
   const [error, setError] = useState<string | null>(null);
 
+  const [isTouched, setIsTouched] = useState(false);
+
   async function handleSearch() {
     const albumTitle = formData.album;
 
@@ -69,6 +71,10 @@ const AddAlbumModal = ({ modalClose, addAlbum, existingAlbums }: Props) => {
       ...prev,
       [eventName]: eventValue,
     }));
+
+    if (eventValue.trim() && eventName === "album") {
+      setError(null);
+    }
   }
 
   function handleAddAlbum(event: React.SubmitEvent<HTMLFormElement>) {
@@ -100,6 +106,14 @@ const AddAlbumModal = ({ modalClose, addAlbum, existingAlbums }: Props) => {
     });
   }
 
+  function handleBlur(event: React.FocusEvent<HTMLInputElement>) {
+    setIsTouched(true);
+
+    if (formData.album === "") {
+      setError("Album title is required");
+    }
+  }
+
   return ReactDOM.createPortal(
     <div className="modal-overlay">
       <div className="modal">
@@ -119,7 +133,9 @@ const AddAlbumModal = ({ modalClose, addAlbum, existingAlbums }: Props) => {
                 name="album"
                 value={formData.album}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
+
               {/* 
               <input
                 type="text"
@@ -138,18 +154,17 @@ const AddAlbumModal = ({ modalClose, addAlbum, existingAlbums }: Props) => {
                 {isLoading ? "Searching..." : "Search"}
               </button>
             </div>
+            {isTouched && error && (
+              <div className="empty-album-input">
+                <p>{error}</p>
+              </div>
+            )}
 
             {/* {isLoading && (
               <div className="search-loading">
                 <p> Searching...</p>
               </div>
             )} */}
-
-            {error && (
-              <div className="error-msg">
-                <p className="error-text">{error}</p>
-              </div>
-            )}
 
             {searchResults.length > 0 && (
               <ul className="search-result">
