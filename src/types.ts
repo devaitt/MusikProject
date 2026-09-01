@@ -12,6 +12,7 @@ export interface Album {
   year: number;
   isFavorite: boolean;
   tracks: Track[];
+  releaseType: ReleaseType;
 }
 
 export interface AlbumForm {
@@ -21,4 +22,7 @@ export interface AlbumForm {
   cover: string;
   isFavorite: boolean;
   tracks: Track[];
+  releaseType: ReleaseType | null;
 }
+
+export type ReleaseType = "album" | "single";

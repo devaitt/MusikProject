@@ -21,6 +21,7 @@ const AddAlbumModal = ({ modalClose, addAlbum, existingAlbums }: Props) => {
     cover: "",
     isFavorite: false,
     tracks: [],
+    releaseType: null,
   });
 
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
@@ -90,23 +91,29 @@ const AddAlbumModal = ({ modalClose, addAlbum, existingAlbums }: Props) => {
       return;
     }
 
-    addAlbum({
-      ...formData,
-      year: Number(formData.year),
-      id: crypto.randomUUID(),
-    });
-    modalClose();
-    setFormData({
-      album: "",
-      artist: "",
-      year: "",
-      cover: "",
-      isFavorite: false,
-      tracks: [],
-    });
+    if (formData.releaseType === null) {
+      setError("Please select release album");
+    } else {
+      addAlbum({
+        ...formData,
+        releaseType: formData.releaseType,
+        year: Number(formData.year),
+        id: crypto.randomUUID(),
+      });
+      modalClose();
+      setFormData({
+        album: "",
+        artist: "",
+        year: "",
+        cover: "",
+        isFavorite: false,
+        tracks: [],
+        releaseType: null,
+      });
+    }
   }
 
-  function handleBlur(event: React.FocusEvent<HTMLInputElement>) {
+  function handleBlur() {
     setIsTouched(true);
 
     if (formData.album === "") {

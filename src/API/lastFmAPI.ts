@@ -12,7 +12,7 @@
 //   console.log(objectAlbum);
 // }
 
-import { type Track } from "../types";
+import { type Track, ReleaseType } from "../types";
 
 interface SearchImage {
   size: string;
@@ -31,6 +31,7 @@ interface AlbumInfo {
   artist: string;
   cover: string;
   tracks: Track[];
+  releaseType: ReleaseType;
 }
 
 interface LastFmTrack {
@@ -42,7 +43,7 @@ interface LastFmAlbum {
   artist: string;
   image: SearchImage[];
   tracks: {
-    track: LastFmTrack[];
+    track: LastFmTrack[] | LastFmTrack;
   };
 }
 
@@ -72,12 +73,17 @@ export async function getAlbumInfo(
   const data: LastFmAlbumResponse = await response.json();
 
   const albumInfo = data.album;
-  console.log(albumInfo.tracks.track[0]);
+
+  const tracks = albumInfo.tracks.track;
+  const normalizedTracks = Array.isArray(tracks) ? tracks : [tracks];
+
+  console.log(albumInfo.tracks);
   return {
     album: albumInfo.name,
     artist: albumInfo.artist,
     cover: albumInfo.image[3]["#text"],
-    tracks: albumInfo.tracks.track.map((track) => ({
+    releaseType: normalizedTracks.length > 1 ? "album" : "single",
+    tracks: normalizedTracks.map((track) => ({
       id: crypto.randomUUID(),
       title: track.name,
       isFavorite: false,

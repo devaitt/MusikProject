@@ -21,6 +21,7 @@ export default function AlbumInfo({ currentAlbum, openEditModal }: Props) {
               <span>·</span>
               <p className="info__year">{currentAlbum.year}</p>
             </div>
+            <p>{currentAlbum.releaseType}</p>
             <Button onClick={() => openEditModal()}>Edit</Button>
             {/* <div>{children}</div> */}
           </div>

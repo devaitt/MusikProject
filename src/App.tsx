@@ -22,11 +22,15 @@ function App() {
     if (savedAlbums) {
       const parsedAlbums: Album[] = JSON.parse(savedAlbums);
 
-      const updatedAlbums = parsedAlbums.map((savedAlbum) => {
-        if (savedAlbum.isFavorite === undefined) {
+      const updatedAlbums = parsedAlbums.map<Album>((savedAlbum) => {
+        if (
+          savedAlbum.isFavorite === undefined ||
+          savedAlbum.releaseType === undefined
+        ) {
           return {
             ...savedAlbum,
-            isFavorite: false,
+            isFavorite: savedAlbum.isFavorite ?? false,
+            releaseType: savedAlbum.tracks.length > 1 ? "album" : "single",
           };
         }
         return savedAlbum;
@@ -47,7 +51,7 @@ function App() {
 
     async function testSearch() {
       try {
-        const result = await getAlbumInfo("Mike", "Burning Desire");
+        const result = await getAlbumInfo("ecco2k", "pollen");
         console.log("результат:", result);
       } catch (error) {
         console.error("ошибка searchAlbum:", error);
