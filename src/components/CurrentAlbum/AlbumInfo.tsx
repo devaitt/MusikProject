@@ -3,13 +3,21 @@ import React from "react";
 import { type Album } from "../../types";
 import "./albumInfo.css";
 import Button from "../Button/Button";
+import FavIcon from "../../../public/FavIcon";
+import FavIconFill from "../../../public/FavIconFill";
+import EditIcon from "../../../public/EditIcon";
 
 interface Props {
   currentAlbum: Album;
   openEditModal: () => void;
+  toggleAlbumFavorite: (id: string) => void;
 }
 
-export default function AlbumInfo({ currentAlbum, openEditModal }: Props) {
+export default function AlbumInfo({
+  currentAlbum,
+  openEditModal,
+  toggleAlbumFavorite,
+}: Props) {
   return (
     <section>
       <div className="info__container _container">
@@ -21,8 +29,14 @@ export default function AlbumInfo({ currentAlbum, openEditModal }: Props) {
               <span>·</span>
               <p className="info__year">{currentAlbum.year}</p>
             </div>
-            <p>{currentAlbum.releaseType}</p>
-            <Button onClick={() => openEditModal()}>Edit</Button>
+            <p className="release-type">{currentAlbum.releaseType}</p>
+            <Button onClick={() => openEditModal()}>{<EditIcon />}</Button>
+            <button
+              className="album-favorite"
+              onClick={() => toggleAlbumFavorite(currentAlbum.id)}
+            >
+              {currentAlbum.isFavorite ? <FavIconFill /> : <FavIcon />}
+            </button>
             {/* <div>{children}</div> */}
           </div>
           <div className="info__cover">

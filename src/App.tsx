@@ -177,6 +177,7 @@ function App() {
                   albums={albums}
                   editAlbum={editAlbum}
                   toggleFavorite={toggleFavorite}
+                  toggleAlbumFavorite={toggleAlbumFavorite}
                 />
               </>
             }

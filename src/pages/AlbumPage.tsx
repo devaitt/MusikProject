@@ -11,12 +11,14 @@ interface Props {
   albums: Album[];
   editAlbum: (editedAlbum: Album) => void;
   toggleFavorite: (albumId: string, trackId: string) => void;
+  toggleAlbumFavorite: (albumId: string) => void;
 }
 
 export default function AlbumPage({
   albums,
   editAlbum,
   toggleFavorite,
+  toggleAlbumFavorite,
 }: Props) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -38,6 +40,7 @@ export default function AlbumPage({
           <AlbumInfo
             currentAlbum={currentAlbum}
             openEditModal={openEditModal}
+            toggleAlbumFavorite={toggleAlbumFavorite}
           ></AlbumInfo>
           <TrackList
             tracks={currentAlbum.tracks}
