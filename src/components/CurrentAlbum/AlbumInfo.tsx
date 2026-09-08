@@ -30,13 +30,16 @@ export default function AlbumInfo({
               <p className="info__year">{currentAlbum.year}</p>
             </div>
             <p className="release-type">{currentAlbum.releaseType}</p>
-            <Button onClick={() => openEditModal()}>{<EditIcon />}</Button>
-            <button
-              className="album-favorite"
-              onClick={() => toggleAlbumFavorite(currentAlbum.id)}
-            >
-              {currentAlbum.isFavorite ? <FavIconFill /> : <FavIcon />}
-            </button>
+            <div className="info-actions">
+              <Button onClick={() => openEditModal()}>{<EditIcon />}</Button>
+              <button
+                className="album-favorite"
+                onClick={() => toggleAlbumFavorite(currentAlbum.id)}
+              >
+                {currentAlbum.isFavorite ? <FavIconFill /> : <FavIcon />}
+              </button>
+            </div>
+
             {/* <div>{children}</div> */}
           </div>
           <div className="info__cover">

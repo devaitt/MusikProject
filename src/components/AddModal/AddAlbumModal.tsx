@@ -92,7 +92,7 @@ const AddAlbumModal = ({ modalClose, addAlbum, existingAlbums }: Props) => {
     }
 
     if (formData.releaseType === null) {
-      setError("Please select release album");
+      setError("Please select album");
     } else {
       addAlbum({
         ...formData,
