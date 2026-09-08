@@ -116,7 +116,6 @@ function App() {
         if (album.id !== albumId) {
           return album;
         }
-
         return {
           ...album,
           isFavorite: !album.isFavorite,
