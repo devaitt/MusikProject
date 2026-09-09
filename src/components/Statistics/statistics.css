@@ -24,6 +24,37 @@
   position: relative;
 }
 
+/* Сам слайдер — занимает все оставшееся место */
+swiper-container {
+  flex: 1;
+  width: 100%;
+  overflow: hidden; /* Прячет карточки, которые уходят за экран */
+}
+
+/* Элемент слайда, Swiper сам задаст ему нужную ширину */
+swiper-slide {
+  height: auto;
+}
+
+/* Стили самой карточки, убрали лишние флексы и жесткие сетки */
+.statistics__card {
+  width: 100%; /* Карточка должна занять ровно 100% ширины своего swiper-slide */
+  min-height: 160px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInCard 0.4s ease;
+  box-sizing: border-box;
+}
+
+.statistics__card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  border-color: #000;
+}
+
+/* Кнопки навигации стрелочек */
 .statistics__btn {
   flex-shrink: 0;
   width: 48px;
@@ -53,46 +84,7 @@
   transform: scale(0.95);
 }
 
-.statistics__btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.statistics__btn:disabled:hover {
-  background: #fff;
-  color: #333;
-  border-color: #e0e0e0;
-}
-
-/* Список карточек */
-.statistics__list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  flex: 1;
-  transition: all 0.3s ease;
-}
-
-.statistics__card {
-  min-height: 160px;
-  border-radius: 16px;
-  background: #fff;
-  border: 1px solid #f0f0f0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: fadeInCard 0.4s ease;
-}
-
-.statistics__card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-  border-color: #000;
-}
-
+/* Внутренности карточки */
 .stat-card__container {
   height: 100%;
   min-height: 160px;
@@ -102,6 +94,7 @@
   justify-content: center;
   padding: 24px 20px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .stat-card__logo {
@@ -141,35 +134,6 @@
   font-weight: 500;
 }
 
-/* Индикаторы (точки) */
-.statistics__dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 24px;
-}
-
-.statistics__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
-  background: #ddd;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
-}
-
-.statistics__dot:hover {
-  background: #999;
-}
-
-.statistics__dot.active {
-  background: #000;
-  width: 24px;
-  border-radius: 4px;
-}
-
 /* Анимация появления карточек */
 @keyframes fadeInCard {
   from {
@@ -182,13 +146,8 @@
   }
 }
 
-/* Адаптивность */
+/* Адаптивность для кнопок и шрифтов */
 @media (max-width: 1024px) {
-  .statistics__list {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
   .statistics__btn {
     width: 40px;
     height: 40px;
@@ -206,16 +165,10 @@
     font-size: 22px;
   }
 
-  .statistics__list {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
   .statistics__btn {
     width: 36px;
     height: 36px;
     font-size: 18px;
-    gap: 10px;
   }
 
   .statistics__wrapper {
@@ -241,12 +194,6 @@
 }
 
 @media (max-width: 480px) {
-  .statistics__list {
-    grid-template-columns: 1fr;
-    max-width: 280px;
-    margin: 0 auto;
-  }
-
   .statistics__btn {
     width: 32px;
     height: 32px;
