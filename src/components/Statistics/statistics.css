@@ -154,6 +154,10 @@ swiper-slide {
     padding: 16px 0;
   }
 
+  .statistics__container {
+    padding: 0 12px;
+  }
+
   .statistics__title {
     font-size: 22px;
   }
@@ -183,6 +187,26 @@ swiper-slide {
   .stat-card__container {
     min-height: 130px;
     padding: 16px;
+  }
+}
+
+/* Additional mobile-first desktop tier (kept alongside the max-width rules above) */
+@media (min-width: 1024px) {
+  .statistics {
+    padding: 32px 0;
+  }
+
+  .statistics__container {
+    padding: 0 32px;
+  }
+
+  .statistics__title {
+    font-size: 36px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card__stat {
+    font-size: 40px;
   }
 }
 

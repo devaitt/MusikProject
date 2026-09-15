@@ -51,3 +51,20 @@
     opacity: 1;
   }
 }
+
+/* ================= RESPONSIVE (mobile-first) ================= */
+
+@media (max-width: 767px) {
+  .toast_container {
+    left: 12px;
+    right: 12px;
+    bottom: 16px;
+  }
+
+  .toast_wrapper {
+    min-width: 0;
+    width: 100%;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+}

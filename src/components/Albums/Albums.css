@@ -47,7 +47,8 @@
 
 .album_list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1fr;
+  justify-items: center;
   gap: 15px;
   align-items: center;
   justify-content: center;
@@ -56,32 +57,9 @@
   margin: 20px 0;
 }
 
-@media (max-width: 1023px) {
-  .album_list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .album_list {
-    grid-template-columns: 320px;
-  }
-
-  .card {
-    padding: 15px;
-  }
-
-  img {
-    height: 100px;
-  }
-
-  .card__title {
-    font-size: 15px;
-  }
-
-  .card__artist {
-    font-size: 13px;
-  }
+.album_list > li {
+  width: 100%;
+  max-width: 340px;
 }
 
 img {
@@ -226,4 +204,74 @@ img {
 
 .card {
   min-width: 0;
+}
+
+/* ================= RESPONSIVE (mobile-first) ================= */
+
+@media (max-width: 767px) {
+  .card {
+    padding: 12px;
+  }
+
+  .card__title {
+    font-size: 18px;
+  }
+
+  .card__artist {
+    font-size: 14px;
+  }
+
+  .filters__text {
+    font-size: 16px;
+  }
+
+  .albums__nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .albums__filters {
+    flex-wrap: wrap;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .show-all-btn,
+  .show-less-btn {
+    min-width: 0;
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@media (min-width: 768px) {
+  .album_list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .album_list > li {
+    max-width: none;
+  }
+
+  .card {
+    padding: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .album_list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .card__title {
+    font-size: 26px;
+  }
 }
