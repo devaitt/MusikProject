@@ -3,7 +3,6 @@
   border-radius: 10px;
   padding: 16px;
   margin-top: 16px;
-  /* border-bottom: 2px solid #000; */
   margin-bottom: 10px;
 }
 
@@ -79,7 +78,14 @@
   justify-content: center;
 }
 
-/* ================= RESPONSIVE (mobile-first) ================= */
+@media (max-width: 767px) {
+  .release-type {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* адаптив */
 
 @media (min-width: 768px) {
   .info__container {
@@ -88,7 +94,7 @@
   }
 
   .info__wrapper {
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
     gap: 32px;
     text-align: left;

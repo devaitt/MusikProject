@@ -66,9 +66,10 @@ img {
   border-radius: 8px;
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  /* object-fit: cover; */
   display: block;
   margin-bottom: 20px;
+  aspect-ratio: 1 / 1;
 }
 
 .albums__nav {
@@ -263,12 +264,12 @@ img {
 
 @media (min-width: 1024px) {
   .album_list {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 24px;
   }
 
   .card {
-    padding: 20px;
+    padding: 15px;
   }
 
   .card__title {
