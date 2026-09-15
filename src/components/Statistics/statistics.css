@@ -24,21 +24,18 @@
   position: relative;
 }
 
-/* Сам слайдер — занимает все оставшееся место */
 swiper-container {
   flex: 1;
   width: 100%;
-  overflow: hidden; /* Прячет карточки, которые уходят за экран */
+  overflow: hidden;
 }
 
-/* Элемент слайда, Swiper сам задаст ему нужную ширину */
 swiper-slide {
   height: auto;
 }
 
-/* Стили самой карточки, убрали лишние флексы и жесткие сетки */
 .statistics__card {
-  width: 100%; /* Карточка должна занять ровно 100% ширины своего swiper-slide */
+  width: 100%;
   min-height: 160px;
   border-radius: 16px;
   background: #fff;
@@ -54,7 +51,6 @@ swiper-slide {
   border-color: #000;
 }
 
-/* Кнопки навигации стрелочек */
 .statistics__btn {
   flex-shrink: 0;
   width: 48px;
@@ -84,7 +80,6 @@ swiper-slide {
   transform: scale(0.95);
 }
 
-/* Внутренности карточки */
 .stat-card__container {
   height: 100%;
   min-height: 160px;
@@ -134,7 +129,6 @@ swiper-slide {
   font-weight: 500;
 }
 
-/* Анимация появления карточек */
 @keyframes fadeInCard {
   from {
     opacity: 0;
@@ -146,7 +140,6 @@ swiper-slide {
   }
 }
 
-/* Адаптивность для кнопок и шрифтов */
 @media (max-width: 1024px) {
   .statistics__btn {
     width: 40px;

@@ -43,22 +43,6 @@ export default function StaticsticsSection({ albums }: Props) {
     { value: totalArtists, icon: "🎤", label: "artists" },
   ];
 
-  // useEffect(() => {
-  //   if (swiperRef.current) {
-  //     const swiper = swiperRef.current.swiper;
-
-  //     if (swiper) {
-  //       swiper.params.breakpoints = {
-  //         320: { slidesPerView: 1, spaceBetween: 10 },
-  //         768: { slidesPerView: 2, spaceBetween: 20 },
-  //         1024: { slidesPerView: 3, spaceBetween: 30 },
-  //       };
-
-  //       swiper.update();
-  //     }
-  //   }
-  // }, []);
-
   useEffect(() => {
     if (swiperInstance && prevRef.current && nextRef.current) {
       swiperInstance.navigation.destroy();
@@ -85,22 +69,19 @@ export default function StaticsticsSection({ albums }: Props) {
           <Swiper
             onSwiper={(swiper) => {
               setSwiperInstance(swiper);
-              console.log("SWIPER:", swiper);
-              console.log("PREV:", prevRef.current);
-              console.log("NEXT:", nextRef.current);
             }}
             modules={[Navigation]}
             navigation={{
               prevEl: prevRef.current,
               nextEl: nextRef.current,
             }}
+            loop={true}
             breakpoints={{
               320: { slidesPerView: 1, spaceBetween: 10 },
               768: { slidesPerView: 2, spaceBetween: 20 },
               1024: { slidesPerView: 3, spaceBetween: 30 },
             }}
             onBeforeInit={(swiper: any) => {
-              // Привязываем кнопки после инициализации
               swiper.params.navigation.prevEl = prevRef.current;
               swiper.params.navigation.nextEl = nextRef.current;
             }}
