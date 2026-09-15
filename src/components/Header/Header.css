@@ -8,13 +8,17 @@
 }
 
 .header__title {
-  font-size: 50px;
+  font-size: 26px;
   text-transform: lowercase;
   font-weight: 700;
 }
 
 .header__container {
-  padding: 5px 0;
+  padding: 8px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .header__earpods {
@@ -23,4 +27,38 @@
   right: 50px;
   width: 250px;
   pointer-events: none;
+}
+
+/* ================= RESPONSIVE (mobile-first) ================= */
+
+@media (min-width: 768px) {
+  .header__title {
+    font-size: 36px;
+  }
+
+  .header__container {
+    padding: 6px 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__title {
+    font-size: 50px;
+  }
+
+  .header__container {
+    padding: 5px 0;
+  }
+
+  .header__earpods {
+    width: 250px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .header__earpods {
+    width: 140px;
+    right: 20px;
+    top: -10px;
+  }
 }

@@ -1,40 +1,45 @@
 .info__container {
   background: #fff;
   border-radius: 10px;
-  padding: 40px 50px;
-  margin-top: 30px;
+  padding: 16px;
+  margin-top: 16px;
   /* border-bottom: 2px solid #000; */
   margin-bottom: 10px;
 }
 
 .info__wrapper {
   display: flex;
+  flex-direction: column-reverse;
   justify-content: space-between;
   align-items: center;
-  gap: 60px;
+  gap: 20px;
 }
 
 .info__name {
-  font-size: clamp(48px, 6vw, 90px);
+  font-size: clamp(28px, 8vw, 90px);
   font-weight: 700;
   line-height: 1;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 .info__artist {
-  font-size: 34px;
+  font-size: 20px;
   font-weight: 500;
   color: #333;
 }
 
 .info__cover {
-  width: 340px;
-  height: 340px;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 16px;
   flex-shrink: 0;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
   transition: 0.3s ease;
+  margin: 0 auto;
 }
 
 .info__cover:hover {
@@ -44,11 +49,12 @@
 .info__flex {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
 }
 
 .info__year {
-  font-size: 28px;
+  font-size: 18px;
   font-weight: 500;
   color: #333;
 }
@@ -70,4 +76,63 @@
   display: flex;
   gap: 5px;
   align-items: center;
+  justify-content: center;
+}
+
+/* ================= RESPONSIVE (mobile-first) ================= */
+
+@media (min-width: 768px) {
+  .info__container {
+    padding: 24px 32px;
+    margin-top: 24px;
+  }
+
+  .info__wrapper {
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 32px;
+    text-align: left;
+  }
+
+  .info__name,
+  .info__year {
+    text-align: left;
+  }
+
+  .info__flex,
+  .info-actions {
+    justify-content: flex-start;
+  }
+
+  .info__cover {
+    max-width: 220px;
+    margin: 0;
+  }
+
+  .info__artist {
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .info__container {
+    padding: 40px 50px;
+    margin-top: 30px;
+  }
+
+  .info__wrapper {
+    gap: 60px;
+  }
+
+  .info__cover {
+    max-width: 340px;
+  }
+
+  .info__artist {
+    font-size: 34px;
+  }
+
+  .info__year {
+    font-size: 28px;
+  }
 }

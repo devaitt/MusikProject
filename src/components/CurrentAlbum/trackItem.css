@@ -20,7 +20,7 @@
 }
 
 .item__container {
-  padding: 10px 40px;
+  padding: 10px 16px;
   background-color: #fff;
   border-radius: 0;
   transition: background-color 0.1s ease;
@@ -100,4 +100,29 @@ p {
 .favorite-btn.active:hover {
   color: #000;
   background-color: rgba(28, 26, 17, 0.1);
+}
+
+/* ================= RESPONSIVE (mobile-first) ================= */
+
+@media (max-width: 767px) {
+  .item__wrapper p {
+    font-size: 15px;
+  }
+
+  .favorite-btn {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .item__container {
+    padding: 12px 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .item__container {
+    padding: 10px 40px;
+  }
 }

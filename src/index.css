@@ -160,10 +160,24 @@ summary::-webkit-details-marker {
 ._container {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 16px;
 }
 
 body {
   background-color: #e9e9e9;
   font-family: "Rubik";
+}
+
+/* ================= RESPONSIVE (mobile-first) ================= */
+
+@media (min-width: 768px) {
+  ._container {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  ._container {
+    padding: 0 32px;
+  }
 }
