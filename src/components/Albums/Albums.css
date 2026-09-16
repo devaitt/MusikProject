@@ -207,7 +207,7 @@ img {
   min-width: 0;
 }
 
-/* ================= RESPONSIVE (mobile-first) ================= */
+/* адаптив */
 
 @media (max-width: 767px) {
   .card {
