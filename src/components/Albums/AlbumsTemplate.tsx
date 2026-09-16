@@ -1,5 +1,5 @@
 import AlbumCard from "./AlbumCard";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import "../Albums/Albums.css";
 import Button from "../Button/Button";
 import Dropdown from "./Dropdown";
@@ -43,38 +43,48 @@ export default function AlbumsTemplate({
     { value: "favorites", label: "Favorite albums" },
   ];
 
-  const filteredAlbums = albums.filter(
-    (album) =>
-      album.album.toLowerCase().includes(searchValue.toLowerCase()) ||
-      album.artist.toLowerCase().includes(searchValue.toLowerCase())
+  const filteredAlbums = useMemo(
+    () =>
+      albums.filter(
+        (album) =>
+          album.album.toLowerCase().includes(searchValue.toLowerCase()) ||
+          album.artist.toLowerCase().includes(searchValue.toLowerCase())
+      ),
+    [albums, searchValue]
   );
-  const favoriteFilteredAlbums =
-    filterType === "all"
-      ? filteredAlbums
-      : filteredAlbums.filter((album) => album.isFavorite);
+  const favoriteFilteredAlbums = useMemo(
+    () =>
+      filterType === "all"
+        ? filteredAlbums
+        : filteredAlbums.filter((album) => album.isFavorite),
+    [filteredAlbums, filterType]
+  );
 
-  const sortedAlbums =
-    sortOrder === ""
-      ? favoriteFilteredAlbums
-      : [...favoriteFilteredAlbums].sort((a, b) => {
-          if (sortOrder === "asc") {
-            return a.album.localeCompare(b.album);
-          }
+  const sortedAlbums = useMemo(
+    () =>
+      sortOrder === ""
+        ? favoriteFilteredAlbums
+        : [...favoriteFilteredAlbums].sort((a, b) => {
+            if (sortOrder === "asc") {
+              return a.album.localeCompare(b.album);
+            }
 
-          if (sortOrder === "desc") {
-            return b.album.localeCompare(a.album);
-          }
+            if (sortOrder === "desc") {
+              return b.album.localeCompare(a.album);
+            }
 
-          if (sortOrder === "newest") {
-            return b.year - a.year;
-          }
+            if (sortOrder === "newest") {
+              return b.year - a.year;
+            }
 
-          if (sortOrder === "oldest") {
-            return a.year - b.year;
-          }
+            if (sortOrder === "oldest") {
+              return a.year - b.year;
+            }
 
-          return 0;
-        });
+            return 0;
+          }),
+    [sortOrder, favoriteFilteredAlbums]
+  );
 
   const displayedAlbums: Album[] = showAll
     ? sortedAlbums
