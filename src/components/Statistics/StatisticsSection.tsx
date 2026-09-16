@@ -5,7 +5,7 @@ import FavIconFill from "../../../public/FavIconFill";
 import { Album } from "../../types";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/swiper.css";
 import "swiper/css/navigation";
 
@@ -13,7 +13,8 @@ interface Props {
   albums: Album[];
 }
 
-export default function StaticsticsSection({ albums }: Props) {
+function StaticsticsSection({ albums }: Props) {
+  console.log("test stattistics");
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
   const prevRef = useRef<any>(null);
   const nextRef = useRef<any>(null);
@@ -105,3 +106,5 @@ export default function StaticsticsSection({ albums }: Props) {
     </section>
   );
 }
+
+export default React.memo(StaticsticsSection);
