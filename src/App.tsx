@@ -100,12 +100,12 @@ function App() {
     [albums]
   );
 
-  function undoDelete() {
+  const undoDelete = useCallback(() => {
     if (deletedAlbum) {
       setAlbums((prev) => [...prev, deletedAlbum]);
     }
     setDeletedAlbum(null);
-  }
+  }, [deletedAlbum]);
 
   function resetAlbums() {
     setAlbums(initialAlbums);
