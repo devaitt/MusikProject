@@ -7,7 +7,7 @@ interface Props {
   onUndo: () => void;
 }
 
-export default function DeleteToast({ album, onUndo }: Props) {
+function DeleteToast({ album, onUndo }: Props) {
   return (
     <>
       <div className="toast_container">
@@ -21,3 +21,5 @@ export default function DeleteToast({ album, onUndo }: Props) {
     </>
   );
 }
+
+export default React.memo(DeleteToast);

@@ -89,16 +89,15 @@ function App() {
     );
   }
 
-  const deleteAlbum = useCallback(
-    (id: string) => {
-      const albumToDelete = albums.find((album) => album.id === id);
+  const deleteAlbum = useCallback((id: string) => {
+    setAlbums((prev) => {
+      const albumToDelete = prev.find((album) => album.id === id);
       if (albumToDelete) {
         setDeletedAlbum(albumToDelete);
       }
-      setAlbums(albums.filter((album) => album.id !== id));
-    },
-    [albums]
-  );
+      return prev.filter((album) => album.id !== id);
+    });
+  }, []);
 
   const undoDelete = useCallback(() => {
     if (deletedAlbum) {

@@ -11,11 +11,7 @@ interface Props {
   toggleAlbumFavorite: (albumId: string) => void;
 }
 
-export default function AlbumCard({
-  album,
-  deleteAlbum,
-  toggleAlbumFavorite,
-}: Props) {
+function AlbumCard({ album, deleteAlbum, toggleAlbumFavorite }: Props) {
   function handelAlbumFavorite() {
     toggleAlbumFavorite(album.id);
   }
@@ -42,3 +38,5 @@ export default function AlbumCard({
     </li>
   );
 }
+
+export default React.memo(AlbumCard);
