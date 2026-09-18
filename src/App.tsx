@@ -1,7 +1,7 @@
 import Header from "./components/Header/Header";
 import AlbumsTemplate from "./components/Albums/AlbumsTemplate";
 import AddAlbumModal from "./components/AddModal/AddAlbumModal";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { albums as initialAlbums } from "./data/albums";
 import Button from "./components/Button/Button";
 import AlbumPage from "./pages/AlbumPage";
@@ -89,15 +89,16 @@ function App() {
     );
   }
 
-  function deleteAlbum(id: string) {
-    const albumToDelete = albums.find((album) => album.id === id);
-    if (albumToDelete) {
-      setDeletedAlbum(albumToDelete);
-    }
-    setAlbums((prev) => {
-      return prev.filter((album) => album.id !== id);
-    });
-  }
+  const deleteAlbum = useCallback(
+    (id: string) => {
+      const albumToDelete = albums.find((album) => album.id === id);
+      if (albumToDelete) {
+        setDeletedAlbum(albumToDelete);
+      }
+      setAlbums(albums.filter((album) => album.id !== id));
+    },
+    [albums]
+  );
 
   function undoDelete() {
     if (deletedAlbum) {
@@ -110,7 +111,7 @@ function App() {
     setAlbums(initialAlbums);
   }
 
-  function toggleAlbumFavorite(albumId: string) {
+  const toggleAlbumFavorite = useCallback((albumId: string) => {
     setAlbums((prev) => {
       return prev.map((album) => {
         if (album.id !== albumId) {
@@ -122,9 +123,9 @@ function App() {
         };
       });
     });
-  }
+  }, []);
 
-  function toggleFavorite(albumId: string, trackId: string) {
+  const toggleFavorite = useCallback((albumId: string, trackId: string) => {
     setAlbums((prev) =>
       prev.map((album) => {
         if (album.id !== albumId) {
@@ -146,7 +147,7 @@ function App() {
         };
       })
     );
-  }
+  }, []);
 
   return (
     <>
