@@ -3,63 +3,33 @@ import AlbumsTemplate from "./components/Albums/AlbumsTemplate";
 import AddAlbumModal from "./components/AddModal/AddAlbumModal";
 import { useState, useEffect, useCallback } from "react";
 import { albums as initialAlbums } from "./data/albums";
-import Button from "./components/Button/Button";
 import AlbumPage from "./pages/AlbumPage";
 import { Route, Routes } from "react-router-dom";
-import { searchAlbum, getAlbumInfo } from "./API/lastFmAPI";
 import StaticsticsSection from "./components/Statistics/StatisticsSection";
 import FavoriteAlbumsPage from "./pages/FavoriteAlbumsPage";
 import DeleteToast from "./components/DeleteToast/DeleteToast";
 import React from "react";
 import { type Album } from "./types";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deletedAlbum, setDeletedAlbum] = useState<Album | null>(null);
-  const [albums, setAlbums] = useState<Album[]>(() => {
-    const savedAlbums = localStorage.getItem("albums");
-
-    if (savedAlbums) {
-      const parsedAlbums: Album[] = JSON.parse(savedAlbums);
-
-      const updatedAlbums = parsedAlbums.map<Album>((savedAlbum) => {
-        if (
-          savedAlbum.isFavorite === undefined ||
-          savedAlbum.releaseType === undefined
-        ) {
-          return {
-            ...savedAlbum,
-            isFavorite: savedAlbum.isFavorite ?? false,
-            releaseType: savedAlbum.tracks.length > 1 ? "album" : "single",
-          };
-        }
-        return savedAlbum;
-      });
-
-      return updatedAlbums;
-    }
-
-    return initialAlbums;
+  const [albums, setAlbums] = useLocalStorage<Album[]>({
+    key: "albums",
+    initialValue: initialAlbums,
+    parse: (parsedAlbums) =>
+      parsedAlbums.map((savedAlbum) =>
+        savedAlbum.isFavorite === undefined ||
+        savedAlbum.releaseType === undefined
+          ? {
+              ...savedAlbum,
+              isFavorite: savedAlbum.isFavorite ?? false,
+              releaseType: savedAlbum.tracks.length > 1 ? "album" : "single",
+            }
+          : savedAlbum
+      ),
   });
-
-  useEffect(() => {
-    localStorage.setItem("albums", JSON.stringify(albums));
-  }, [albums]);
-
-  useEffect(() => {
-    console.log("useEffect работает");
-
-    async function testSearch() {
-      try {
-        const result = await getAlbumInfo("ecco2k", "pollen");
-        console.log("результат:", result);
-      } catch (error) {
-        console.error("ошибка searchAlbum:", error);
-      }
-    }
-
-    testSearch();
-  }, []);
 
   useEffect(() => {
     if (deletedAlbum) {
@@ -72,6 +42,7 @@ function App() {
       };
     }
   }, [deletedAlbum]);
+
   function openModal() {
     setIsModalOpen(true);
   }
