@@ -11,6 +11,7 @@ import DeleteToast from "./components/DeleteToast/DeleteToast";
 import React from "react";
 import { type Album } from "./types";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import Users from "./components/Users";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -129,6 +130,7 @@ function App() {
             path="/"
             element={
               <>
+                <Users />
                 <StaticsticsSection albums={albums}></StaticsticsSection>
                 <AlbumsTemplate
                   openModal={openModal}

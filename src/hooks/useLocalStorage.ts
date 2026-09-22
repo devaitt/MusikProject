@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-interface Props<T> {
+interface useLocalStorageOptions<T> {
   key: string;
   initialValue: T;
   parse?: (raw: T) => T;
@@ -10,7 +10,7 @@ export function useLocalStorage<T>({
   key,
   initialValue,
   parse,
-}: Props<T>): [T, React.Dispatch<React.SetStateAction<T>>] {
+}: useLocalStorageOptions<T>): [T, React.Dispatch<React.SetStateAction<T>>] {
   const [value, setValue] = useState<T>(() => {
     const existingValue = localStorage.getItem(key);
     if (!existingValue) {
