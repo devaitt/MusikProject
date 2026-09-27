@@ -6,7 +6,7 @@ import { albums as initialAlbums } from "./data/albums";
 import AlbumPage from "./pages/AlbumPage";
 import { Route, Routes } from "react-router-dom";
 import StaticsticsSection from "./components/Statistics/StatisticsSection";
-import FavoriteAlbumsPage from "./pages/FavoriteAlbumsPage";
+import { Link } from "react-router-dom";
 import DeleteToast from "./components/DeleteToast/DeleteToast";
 import React from "react";
 import { type Album } from "./types";
@@ -130,7 +130,6 @@ function App() {
             path="/"
             element={
               <>
-                <Users />
                 <StaticsticsSection albums={albums}></StaticsticsSection>
                 <AlbumsTemplate
                   openModal={openModal}
@@ -138,6 +137,23 @@ function App() {
                   deleteAlbum={deleteAlbum}
                   toggleAlbumFavorite={toggleAlbumFavorite}
                 />
+                <Link to="/users">Users</Link>
+              </>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <>
+                <Users />
+              </>
+            }
+          />
+          <Route
+            path="/users/:id"
+            element={
+              <>
+                <Users />
               </>
             }
           />
@@ -151,14 +167,6 @@ function App() {
                   toggleFavorite={toggleFavorite}
                   toggleAlbumFavorite={toggleAlbumFavorite}
                 />
-              </>
-            }
-          />
-          <Route
-            path="/favoriteAlbums"
-            element={
-              <>
-                <FavoriteAlbumsPage />
               </>
             }
           />
